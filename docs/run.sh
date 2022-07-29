@@ -22,7 +22,7 @@ then
     fi
     if [ -f "_build/html/index.html"  ];
     then
-        open _build/html/index.html
+        start _build/html/index.html
     fi
 fi
 
