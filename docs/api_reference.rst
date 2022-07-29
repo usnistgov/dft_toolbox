@@ -1,4 +1,5 @@
-# Title
+API Reference
+-------------
 
 .. currentmodule:: dft_toolbox
 .. autosummary::
