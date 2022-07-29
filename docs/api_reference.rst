@@ -3,5 +3,5 @@
 .. autosummary::
    :toctree: _autosummary
 
-   dft_toolbox
+   utilities
 
