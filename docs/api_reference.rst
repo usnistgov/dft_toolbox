@@ -1,6 +1,3 @@
-"""
-Solvation Free Energy
-"""
 
 .. currentmodule:: dft_toolbox
 .. autosummary::
