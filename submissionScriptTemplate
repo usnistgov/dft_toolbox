@@ -25,7 +25,7 @@ module purge
 module load `/share/sw/gaussian/gaussian-assist/select-gaussian-version`
 
 #module load pgi/16.5
-export g16root=/home/hnr2/Linux_AVX2_Linda
+export g16root=/home/jac16/Linux_AVX2_Linda
 . $g16root/g16/bsd/g16.profile
 
 ### Gaussian Settings ###########
