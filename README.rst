@@ -25,8 +25,8 @@ Python package to process electronic structure calculation data (e.g., continuum
 Installation
 ------------
 
- 1. Download the master branch from our github page as a zip file, or clone it with git via ``https://git@gitlab.nist.gov/hnr2/dft-toolbox`` to your working directory.
- 2. After changing directories, install with ``python setup.py install --user`` .
+1. Download the master branch from our github page as a zip file, or clone it with git via ``https://git@gitlab.nist.gov/hnr2/dft-toolbox`` to your working directory.
+2. After changing directories, install with ``python setup.py install --user`` .
 
 Contents and Features
 ----------------------
