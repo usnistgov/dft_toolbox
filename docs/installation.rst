@@ -32,13 +32,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://gitlab.com/jac16/dft_toolbox
+    $ git clone git://gitlab.com/hnr2/dft_toolbox
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl -OJL https://git@gitlab.nist.gov/jac16/dft-toolbox/tarball/master
+    $ curl -OJL https://git@gitlab.nist.gov/hnr2/dft-toolbox/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -47,5 +47,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _GitLab repo: https://git@gitlab.nist.gov/jac16/dft-toolbox
-.. _tarball: https://git@gitlab.nist.gov/jac16/dft-toolbox/tarball/master
+.. _GitLab repo: https://git@gitlab.nist.gov/hnr2/dft-toolbox
+.. _tarball: https://git@gitlab.nist.gov/hnr2/dft-toolbox/tarball/master
