@@ -606,7 +606,7 @@ def create_arkane_input(name, freq_log, pcm_log=None, linear=False, spinMultipli
                     f"frequencies = Log('{freq_log}')\n\n",
                 ]
             )
-    with open("input.py", "w") as i:
+    with open("input.py", "a") as i:
         i.writelines(
             ["\n\n", f"species('{name}', '{name}.py')\n", f"thermo('{name}', 'NASA')\n\n"]
         )
