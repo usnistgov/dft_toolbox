@@ -4,11 +4,10 @@ Created on Wed Jul 27 15:09:58 2022
 @author: hnr2 & jac16
 """
 
-import os
+import io, os, pkgutil, subprocess
 import numpy as np
 import pandas as pd
 import glob
-import subprocess
 
 R = 0.0019872042586408316  # kcal/(mol*K)
 
@@ -450,10 +449,17 @@ def create_g16_input(fname, GasRouteSection, PCMRouteSection, coordFile, charge=
     There is no output after correct usage of the function. The generated Gaussian job file and associated .slurm script will appear in the directory within which this function is run.
     """    
     coords = extract_coordinates(coordFile)[0]
-    with open(rf"{fname}_gas.com", "a") as n:
+    path, filename = os.path.split(fname)
+    if path:
+        cwd = os.getcwd()
+        if cwd not in path:
+            path = os.path.join(cwd,path)
+    check_name = os.path.join(path,filename)
+
+    with open(rf"{fname}_gas.com", "w") as n:
         n.writelines(
             [
-                f"%chk={fname}_gas.chk\n",
+                f"%chk={check_name}_gas.chk\n",
                 f"# {GasRouteSection}\n\n",
                 f"G16 gas-phase opt/freq job for {fname}\n\n",
                 f"{charge} {spinMultiplicity}\n",
@@ -465,11 +471,12 @@ def create_g16_input(fname, GasRouteSection, PCMRouteSection, coordFile, charge=
         PCMRouteSection += " scrf=(iefpcm,solvent=water,externaliteration,1stvac,read)"
     if "geom=check" not in PCMRouteSection:
         PCMRouteSection += " geom=check"
-    with open(rf"{fname}_PCM.com", "a") as n2:
+
+    with open(rf"{fname}_PCM.com", "w") as n2:
         n2.writelines(
             [
-                f'%oldchk={fname}_gas.chk\n',
-                f'%chk={fname}_PCM.chk\n',
+                f'%oldchk={check_name}_gas.chk\n',
+                f'%chk={check_name}_PCM.chk\n',
                 f'# {PCMRouteSection}\n\n',
                 f'G16 PCM job for {fname}\n\n',
                 f'{charge} {spinMultiplicity}\n',
@@ -477,23 +484,27 @@ def create_g16_input(fname, GasRouteSection, PCMRouteSection, coordFile, charge=
             ]
         )
 
-def create_slurm_script(fname, nodes, partition, mem=None, sterr_path=None, stout_path=None, log_path=None):
+def create_slurm_script(fname, filename_g16, nodes, partition, mem, time="168:00:00", filename_sterr=None, filename_stout=None, log_path=None):
     """
     Create a .slurm submission script for a given Gaussian 16 job, using a template .slurm script that will automatically assign G16 environment variables in the most efficient setup.
     Parameters
     ----------
     fname : str
-        A string specifying the filename of the Gaussian job file, NOT including the file extension.
+        A string specifying the filename of the SLURM submission script job file, NOT including the file extension.
+    filename_g16 : str
+        A string specifying the filename and relative path for the Gaussian input file, NOT including the file extension. ( Relative to the submission file path defined in ``fname``
     nodes : int
         An integer representing the number of nodes requested.
     partition : str
         A string representing the partition on which the job is to be scheduled.
-    mem : int, Optional, default=None
-        An integer representing the amount (in GB) of memory requested. If none, the quantity is not specified.
-    stout_path : str, Optional, default=None
-        If None, that path (if any) contained in ``fname`` is used to save the standard output file, ``stout_path + stout_{fname.split(os.sep)[-1]}.txt``
-    sterr_path : str, Optional, default=None
-        If None, that path (if any) contained in ``fname`` is used to save the standard error file, ``stout_path + sterr_{fname.split(os.sep)[-1]}.txt``
+    mem : int
+        An integer representing the amount (in GB) of memory requested. Must be specified to access relevant SLURM environmental variables.
+    time : str, Optional, default="168:00:00"
+        Job WallClock Max before job is killed. Default is 7 days.
+    filename_stout : str, Optional, default=None
+        Filename for standard output, default is: ``stout_{fname.split(os.sep)[-1]}.txt``
+    filename_sterr : str, Optional, default=None
+        Filename for standard error, default is: ``sterr_{fname.split(os.sep)[-1]}.txt``
     log_path : str, Optional, default=None
         If None, that path (if any) contained in ``fname`` is used to save the gaussian log file, ``log_path + {fname.split(os.sep)[-1]}_X.log`` where ``X`` is "gas" or "PCM".
 
@@ -502,40 +513,38 @@ def create_slurm_script(fname, nodes, partition, mem=None, sterr_path=None, stou
     There is no output after correct usage of the function. The generated .slurm file will appear in the directory within which this function is run.
 
     """
-    filename, path = os.path.split(fname)
-    if sterr_path == None:
-        sterr_path = path
-    if stout_path == None:
-        stout_path = path
+    path, filename = os.path.split(fname)
+    if filename_sterr == None:
+        filename_sterr = "sterr_{}.txt".format(filename)
+    if filename_stout == None:
+        filename_stout = "stout_{}.txt".format(filename)
 
-    stout_path += "stout_{}.txt".format(filename)
-    sterr_path += "sterr_{}.txt".format(filename)
+    if log_path == None:
+        log_path = path
 
-    with open('submissionScriptTemplate', 'r') as t:
-        template = t.readlines()
+    template = io.TextIOWrapper(io.BytesIO(pkgutil.get_data(__name__, "templates/submissionScriptTemplate")), encoding='utf-8')
 
-    lines = { 1: f'#SBATCH --job-name="{fname}"\n',
+    lines = { 1: f'#SBATCH --job-name="{filename}"\n',
               2: f"#SBATCH --nodes={nodes}                         # number of nodes\n",
               3: f"#SBATCH --mem={mem}G                         # memory pool for all cores\n",
-              5: f'#SBATCH --output="{stout_path}"         # standard output\n',
-              6: f'#SBATCH --error="{sterr_path}"          # standard error\n',
+              4: f"#SBATCH -t {time}                       # time (HH:MM:SS)\n",
+              5: f'#SBATCH --output="{filename_stout}"         # standard output\n',
+              6: f'#SBATCH --error="{filename_sterr}"          # standard error\n',
               8: f"#SBATCH -p {partition}\n",
-              10: f"input={fname}\n",
+              10: f"input='{filename_g16}'\n",
               11: f'log_path="{log_path}"\n',
             } 
     output = []
     for i,line in enumerate(template):
         if i in lines:
-            if i == 3 and mem ==None:
-                continue
             if i == 11 and log_path ==None:
                 continue
             output.append(lines[i])
         else:
             output.append(line)
 
-    with open(f"{fname}.slurm", "a") as n:
-        n.writelines(template)
+    with open(f"{fname}.slurm", "w") as n:
+        n.writelines(output)
 
 def create_arkane_input(name, freq_log, pcm_log=None, linear=False, spinMultiplicity=1, opticalIsomers=1):
     """
@@ -597,7 +606,7 @@ def create_arkane_input(name, freq_log, pcm_log=None, linear=False, spinMultipli
                     f"frequencies = Log('{freq_log}')\n\n",
                 ]
             )
-    with open("input.py", "a") as i:
+    with open("input.py", "w") as i:
         i.writelines(
             ["\n\n", f"species('{name}', '{name}.py')\n", f"thermo('{name}', 'NASA')\n\n"]
         )
