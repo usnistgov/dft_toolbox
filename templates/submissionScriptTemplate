@@ -9,6 +9,17 @@
 #SBATCH -p 
 
 input=
+log_path=""
+
+path=$(dirname "${input}")
+if [ ${path} = "." ]; then
+    path=""
+fi
+input=$(basename "${input}")
+if [ ${log_path} = "" ]; then
+    log_path=${path}
+fi
+
         
 # Author: Jennifer A Clark
 nodes=${SLURM_JOB_NUM_NODES}
@@ -63,21 +74,21 @@ echo "Gaussian SDEF ${GAUSS_SDEF}"
 # Max scratch space added to routecard
 maxdisk=`df /scratch | awk '/[0-9]%/{print $(NF-2)}'`
 echo "This node has a maximum scratch space of ${maxdisk}"
-cp ${input}_gas.com new_${input}_gas.com
-sed -i "/^#n*/a # MaxDisk=${maxdisk}KB" new_${input}_gas.com  # Add the MaxDisk to the routecard in a new line
+cp ${path}/${input}_gas.com ${path}/new_${input}_gas.com
+sed -i "/^#n*/a # MaxDisk=${maxdisk}KB" ${path}/new_${input}_gas.com  # Add the MaxDisk to the routecard in a new line
 
-time g16 < new_${input}_gas.com > ${input}_gas.out &
+time g16 < ${path}/new_${input}_gas.com > ${log_path}/${input}_gas.log &
 wait
 
-cp ${input}_PCM.com new_${input}_PCM.com
+cp ${path}/${input}_PCM.com ${path}/new_${input}_PCM.com
 sed -i "/^#n*/a # MaxDisk=${maxdisk}KB" new_${input}_PCM.com  # Add the MaxDisk to the routecard in a new line
 
-time g16 < new_${input}_PCM.com > ${input}_PCM.out &
+time g16 < ${path}/new_${input}_PCM.com > ${path}/${log_input}_PCM.log &
 wait
 
-formchk ${input}_gas.chk &
-wait
-formchk ${input}_PCM.chk &
-wait
+#formchk ${input}_gas.chk &
+#wait
+#formchk ${input}_PCM.chk &
+#wait
 
 rm -rf /scratch/${USER}/${SLURM_JOB_ID}
