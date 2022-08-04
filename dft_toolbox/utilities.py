@@ -184,7 +184,7 @@ def check_job_status(username, errorLogs, outputLogs, print_output=True, save_ou
             running.append(jobIDs[i])
     
     oscillatingStatus = checkOscillatingJob(running, outputLogs)
-    oscillatingStatus = [running[i] if oscillatingStatus[i] for i in range(len(running))]
+    oscillatingStatus = [running[i] for i in range(len(running)) if oscillatingStatus[i] ]
     
     failed = []
     completed = []
