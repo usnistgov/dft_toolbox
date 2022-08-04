@@ -48,7 +48,7 @@ setup(
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
-    url='https://git@gitlab.nist.gov/hnr2/dft-toolbox',
+    url='https://git@gitlab.nist.gov/jac16/dft-toolbox',
     version='0.0.0',
     zip_safe=False,
 )
