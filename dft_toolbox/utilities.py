@@ -25,8 +25,8 @@ atomic_num = {
 
 def modify_coordinates(coords, box_size, wrap_cutoff):
     """
-    Returns wrapped coordinate values, for the coordinate_wrapper function which modifies the .xyz file. 
-    
+    Returns wrapped coordinate values, for the coordinate_wrapper function which modifies the .xyz file.
+
     Parameters
     ----------
     coords : list
@@ -35,7 +35,7 @@ def modify_coordinates(coords, box_size, wrap_cutoff):
         The exact box size to wrap around
     wrap_cutoff : float
         The exact cutoff distance to wrap beyond in Angstroms
-    
+
     Returns
     ------
     modified : list
@@ -53,7 +53,7 @@ def modify_coordinates(coords, box_size, wrap_cutoff):
 def coordinate_wrapper(fname, box_size, wrap_cutoff):
     """
     Modifies the .xyz file based on the box size to wrap the coordinates.
-    
+
     Parameters
     ----------
     fname : str
@@ -62,7 +62,7 @@ def coordinate_wrapper(fname, box_size, wrap_cutoff):
         The exact box size to wrap around
     wrap_cutoff : float
         The exact cutoff distance to wrap beyond in Angstroms
-    
+
     Returns
     ------
     Nothing is returned. The provided .xyz file is itself modified.
@@ -85,22 +85,22 @@ def coordinate_wrapper(fname, box_size, wrap_cutoff):
         f.write("\n")
         for num, line in enumerate(lines):
             toWrite = '\n' + ' '*10 + atom_types[num] + ' '*10 + f'{x_coords[num]:.5f}' + f'     {y_coords[num]:.5f}' + f'     {z_coords[num]:.5f}'
-            f.write(toWrite)    
+            f.write(toWrite)
 
 def checkOscillatingJob(runningJobIDs, outputLogs, n_points=5):
     """
     Determine if job is oscillating. Two types: sinusoidal type, such as methyl rotation, or other piecewise oscillation, such as what occurs during optimization of large systems with explicit solvent. This function only supports type 2 for now...
-    
+
     MAKE SURE THE ".OUT" FILENAMES ARE EQUIVALENT TO THE OUTPUTLOG NUMBERING SCHEME: outputlog#####.txt --> sim#####.out
     Parameters
     ---------
     runningJobIDs : array
         A list of the job IDs of the runing jobs.
     outputLogs : array
-        A list of the paths to the output logs. 
+        A list of the paths to the output logs.
     n_points : int, Optional, default=5
-        Number of times oscillation-type behavior is to occur before it is flagged. Optional, default=5. 
-    
+        Number of times oscillation-type behavior is to occur before it is flagged. Optional, default=5.
+
     Returns
     ------
     """
@@ -113,7 +113,7 @@ def checkOscillatingJob(runningJobIDs, outputLogs, n_points=5):
     jobIDs = [ID.rstrip('\n') for ID in jobIDs]
     jobsToCheck = [outputLogs[i][outputLogs[i].find('outputlog'):] for i in range(len(outputLogs)) if jobIDs[i] in runningJobIDs]
     jobsToCheck = ["sim{}.out".format(job[job.find('outputlog')+9:job.find('.txt')]) for job in jobsToCheck]
-    status = []    
+    status = []
     for job in jobsToCheck:
         slurmCommand = 'grep "Step size scaled by" {}'.format(job)
         process = subprocess.Popen(slurmCommand, stdout=subprocess.PIPE, shell=True)
@@ -128,20 +128,20 @@ def checkOscillatingJob(runningJobIDs, outputLogs, n_points=5):
                 oscillating = False
         status.append(oscillating)
     return status
-    
+
 
 def check_job_status(username, errorLogs, outputLogs, print_output=True, save_output=False, filename="job_status.csv"):
     """
-    Determine status of G16 job on SLURM. Run this function in a directory in which G16 jobs are running on HPC. 
+    Determine status of G16 job on SLURM. Run this function in a directory in which G16 jobs are running on HPC.
 
     Parameters
     ----------
     username : str
-        Your userID on HPC cluster. 
+        Your userID on HPC cluster.
     errorLogs : array
         A list of error logs to parse through.
     outputLogs : array
-        A list of output logs to parse through. 
+        A list of output logs to parse through.
     print_output : bool, Optional, default=True
         If True, a list of each category will be printed
     save_output : bool, Optional, default=False
@@ -151,32 +151,32 @@ def check_job_status(username, errorLogs, outputLogs, print_output=True, save_ou
 
     Returns
     ------
-    No returned values. Generates .csv file with the job ID numbers, assigned to a status. 
+    No returned values. Generates .csv file with the job ID numbers, assigned to a status.
 
     """
     errorLogs.sort()
     outputLogs.sort()
-    
+
     jobIDs = []
     for i in range(len(outputLogs)):
         with open(outputLogs[i],'r') as o:
             lines = o.readlines()
         jobIDs.append(lines[0][8:])
     jobIDs = [ID.rstrip('\n') for ID in jobIDs]
-    
+
     slurmCommand = 'squeue -u {} --noheader --format="%A"'.format(username)
     process = subprocess.Popen(slurmCommand, shell=True, stdout=subprocess.PIPE)
     vals = process.communicate()[0].split('\n')
     squeue = [val.rstrip('"').lstrip('"') for val in vals if len(val)>0]
-    
+
     running = []
     for i in range(len(jobIDs)):
         if jobIDs[i] in squeue:
             running.append(jobIDs[i])
-    
+
     oscillatingStatus = checkOscillatingJob(running, outputLogs)
     oscillatingStatus = [running[i] for i in range(len(running)) if oscillatingStatus[i] ]
-    
+
     failed = []
     completed = []
     for i in range(len(errorLogs)):
@@ -439,7 +439,7 @@ def create_g16_input(fname, GasRouteSection, PCMRouteSection, coordFile, charge=
     Returns
     ------
     There is no output after correct usage of the function. The generated Gaussian job file and associated .slurm script will appear in the directory within which this function is run.
-    """    
+    """
     coords = extract_coordinates(coordFile)[0]
     path, filename = os.path.split(fname)
     if path:
@@ -525,7 +525,7 @@ def create_slurm_script(fname, filename_g16, nodes, partition, mem, time="168:00
               8: f"#SBATCH -p {partition}\n",
               10: f"input='{filename_g16}'\n",
               11: f'log_path="{log_path}"\n',
-            } 
+            }
     output = []
     for i,line in enumerate(template):
         if i in lines:
@@ -601,7 +601,7 @@ def create_arkane_input(name, freq_log, pcm_log=None, linear=False, spinMultipli
                 ]
             )
 
-    if os.path.exists("input.py"):    
+    if os.path.exists("input.py"):
         topOfFile = True
         with open("input.py", "r") as i:
             lines = i.readlines()
@@ -632,6 +632,8 @@ def write_arkane_input_header(filename, method=None, basis=None):
 
     Parameters
     ----------
+    filename : str
+        The filname of the Arkane input file to write a header to, typically "input.py".
     method : str, Optional, default=None
         Method used in Arkane.LevelOfTheory. This value is also used in the first portion of the atom energies filename
     basis : str, Optional, default=None
@@ -662,7 +664,7 @@ def write_arkane_input_header(filename, method=None, basis=None):
             for atm, eng in data["atomEnergies"].items():
                 lines.append("    '{}': {},\n".format(atm,eng))
         else:
-            warnings.warn("Internal atom energies file, {}, does not contain atom energies!".format("atom_energies/{}_{}.json".format(method,basis))) 
+            warnings.warn("Internal atom energies file, {}, does not contain atom energies!".format("atom_energies/{}_{}.json".format(method,basis)))
     else:
         lines.append("    'AtomID': EnergyHere,\n")
         freq_scaler = None
@@ -672,7 +674,7 @@ def write_arkane_input_header(filename, method=None, basis=None):
         lines.append("frequencyScaleFactor = {}\n".format(freq_scaler))
     else:
         lines.append("#frequencyScaleFactor = \n")
-    
+
 
     with open("input.py", "w") as i:
         i.writelines(
