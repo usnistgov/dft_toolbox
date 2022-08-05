@@ -226,7 +226,7 @@ def boltzmannG(G, beta):
         The Boltzmann averaged value of the G samples provided.
     """
     G = np.array(G, dtype=np.float128)
-    arr1 = [np.exp(-(val) * beta[i]) for val in G]
+    arr1 = [np.exp(-(val) * beta[i]) for i,val in enumerate(G)]
     Q = sum(arr1)
     pxi = np.array(arr1) / Q
     averagedG = np.float64(np.dot(G, pxi))
