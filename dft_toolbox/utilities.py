@@ -8,19 +8,10 @@ import io, os, pkgutil, subprocess
 import numpy as np
 import pandas as pd
 import glob
+import json
+import warnings
 
 R = 0.0019872042586408316  # kcal/(mol*K)
-
-# Single-point energies of atoms with ground state spin multiplicity at RB3LYP-D3/aug-cc-pVDZ in gas-phase...for Arkane calculations
-atomEnergies = {
-    "C": -37.854195,
-    "H": -0.501657,
-    "N": -54.593843,
-    "O": -75.077162,
-    "S": -398.127992,
-    "Na": -162.290737,
-    "Cl": -460.161474,
-}
 
 atomic_num = {
     1: 'H',
@@ -547,7 +538,7 @@ def create_slurm_script(fname, filename_g16, nodes, partition, mem, time="168:00
     with open(f"{fname}.slurm", "w") as n:
         n.writelines(output)
 
-def create_arkane_input(name, freq_log, pcm_log=None, linear=False, spinMultiplicity=1, opticalIsomers=1):
+def create_arkane_input(name, freq_log, pcm_log=None, linear=False, spinMultiplicity=1, opticalIsomers=1, kwargs_lot={}):
     """
     Create an Arkane thermochemistry calculation input file for a Gaussian .log files (must have a frequency calculation within one of the .log files), input as a list. The necessary files will be generated in the same directory in which the function is run, and that directory can be opened in a terminal, in which the RMG-Py environment can be loaded, and Arkane.py can be run on the file named "input.py".
 
@@ -569,6 +560,8 @@ def create_arkane_input(name, freq_log, pcm_log=None, linear=False, spinMultipli
         A (positive) integer representing the spin state of the system. Defaults to 1, meaning all electrons are spin paired within the system.
     opticalIsomers : int
         An integer representing the number of optical isomers the molecule has. Defaults to 1, meaning no chirality.
+    kwargs_lot : dict, Optional, default={}
+        Keyword arguements for the level of theory specifications in Arkane. See ``write_arkane_input_header`` for options.
 
     Returns
     ------
@@ -607,11 +600,70 @@ def create_arkane_input(name, freq_log, pcm_log=None, linear=False, spinMultipli
                     f"frequencies = Log('{freq_log}')\n\n",
                 ]
             )
+
+    write_arkane_input_header("input.py", **kwargs_lot)
     with open("input.py", "a") as i:
         i.writelines(
             ["\n\n", f"species('{name}', '{name}.py')\n", f"thermo('{name}', 'NASA')\n\n"]
         )
 
+def write_arkane_input_header(filename, method=None, basis=None):
+    """
+    Write header for Arkane input.py file.
+
+    If no method or basis set option is given, empty functions are provided for the user to populate.
+    The atom energies and frequency scale factor for supported levels of theory can be added
+
+    If the desired atom energies or frequency scaling factor isn't included as expected/desired, feel free to contribute!
+
+    Parameters
+    ----------
+    method : str, Optional, default=None
+        Method used in Arkane.LevelOfTheory. This value is also used in the first portion of the atom energies filename
+    basis : str, Optional, default=None
+        Basis set used in Arkane.LevelOfTheory. This value is also used in the second portion of the atom energies filename
+
+    """
+
+    if method == None:
+        flag = False
+        method = "ProvideMethodHere"
+    else:
+        flag = True
+    if basis == None:
+        flag = False
+        basis = "ProvideBasisHere"
+
+    lines = []
+    lines.append("LevelOfTheory(method='{}',basis='{}')\n\n".format(method,basis))
+    lines.append("atomEnergies = {\n")
+
+    if flag:
+        data = json.loads(pkgutil.get_data(__name__, "atom_energies/{}_{}.json".format(method,basis)))
+        if "frequencyScaleFactor" in data:
+            freq_scaler = data["frequencyScaleFactor"]
+        else:
+            freq_scaler = None
+        if "atomEnergies" in data:
+            for atm, eng in data["atomEnergies"].items():
+                lines.append("    '{}': {},\n".format(atm,eng))
+        else:
+            warnings.warn("Internal atom energies file, {}, does not contain atom energies!".format("atom_energies/{}_{}.json".format(method,basis))) 
+    else:
+        lines.append("    'AtomID': EnergyHere,\n")
+        freq_scaler = None
+
+    lines.append("}\n\n")
+    if freq_scaler != None:
+        lines.append("frequencyScaleFactor = {}\n".format(freq_scaler))
+    else:
+        lines.append("#frequencyScaleFactor = \n")
+    
+
+    with open("input.py", "w") as i:
+        i.writelines(
+            lines
+        )
 
 def extract_coordinates(fname):
     """
