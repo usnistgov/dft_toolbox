@@ -98,8 +98,8 @@ def checkOscillatingJob(runningJobIDs, outputLogs, n_points=5):
         A list of the job IDs of the runing jobs.
     outputLogs : array
         A list of the paths to the output logs. 
-    n_points : int
-        Number of times oscillation-type behavior is to occur before it is flagged. Defaults to 5. 
+    n_points : int, Optional, default=5
+        Number of times oscillation-type behavior is to occur before it is flagged. Optional, default=5. 
     
     Returns
     ------
@@ -300,10 +300,10 @@ def calc_pQCT(gas_free_energy_cluster, gas_free_energy_H2O, pcm_dG_solv, n_water
         The value of the free energy of solvation of the given solute-water cluster, calculated by an externaliteraiton PCM calculation with 1stvac option, and extracted by the dGSolvPCM function in this package.
     n_water : int
         The number of water molecules surrounding the solute.
-    dG_solv_H2O : float
-        The free energy of solvation of a single water molecule, as caculated by PCM continuum solvent at the same level of theory as the other calculations conducted. Defaults to -1.34 kcal/mol, which is calculated at RB3LYP-D3/aug-cc-pVDZ, including cavitation and dispersion-repulsion energies.
-    temp : float
-        Specify the absolute temperature (K) to calculate thermo at, defaulting to 298.15K.
+    dG_solv_H2O : float, Optional, default=-1.34
+        The free energy of solvation of a single water molecule, as caculated by PCM continuum solvent at the same level of theory as the other calculations conducted. Optional, default=-1.34, which is calculated at RB3LYP-D3/aug-cc-pVDZ, including cavitation and dispersion-repulsion energies.
+    temp : float, Optional, default=298.15
+        Specify the absolute temperature (K) to calculate thermo at. Optional, default=298.15.
 
     Returns
     ------
@@ -312,7 +312,7 @@ def calc_pQCT(gas_free_energy_cluster, gas_free_energy_H2O, pcm_dG_solv, n_water
     """
     G_aq = (
         (gas_free_energy_cluster + R * temp * np.log(24.46))
-        - (gas_free_energy_H2O + n_water * R * temp * np.log(24.46))
+        - n_water * (gas_free_energy_H2O + R * temp * np.log(24.46))
         + pcm_dG_solv
         - n_water * dG_solv_H2O
         - n_water * R * temp * np.log(1000 / 18.01528)
@@ -328,8 +328,8 @@ def calc_thermo_NASA(coeffs, temp=298.15):
     ----------
     coeffs : array
         An array containing the 7 coefficients of the NASA polynomial.
-    temp : float
-        Specify the absolute temperature (K) to calculate thermo at, defaulting to 298.15K.
+    temp : float, Optional, default=298.15
+        Specify the absolute temperature (K) to calculate thermo at. Optional, default=298.15.
 
     Returns
     ------
@@ -373,7 +373,7 @@ def calc_thermo_Arkane(fname, temperature=298.15):
     fname : str
         Specify the complete path to the chem.inp file output from Arkane.
     temperature : float, Optional, default=298.15
-        Specify the absolute temperature (K) to calculate thermo at, defaulting to 298.15K.
+        Specify the absolute temperature (K) to calculate thermo at. Optional, default=298.15.
 
     Returns
     ------
@@ -431,10 +431,10 @@ def create_g16_input(fname, GasRouteSection, PCMRouteSection, coordFile, charge=
         A string specifiying the keywords after the "# " portion of the standard Gaussian route section for the SCRF=PCM portion of the job. MUST INCLUDE "geom=check". Do not include the "# ", only the keywords. For example, "opt=calcall freq ..." should be specified in full. All generated simulation files will have this same route section.
     coordFile : string
         A string containing the complete path of the .xyz coordinate specification file for which Gaussian simulation files should be created.
-    charge : int
-        An integer representing the total formal charge of the overall system, defaulting to neutral, 0.
-    spinMultiplicity : int
-        An integer representing the spin state of the system, defaulting to 1.
+    charge : int, Optional, default=0
+        An integer representing the total formal charge of the overall system. Optional, default=0.
+    spinMultiplicity : int, Optional, default=1
+        An integer representing the spin state of the system. Optional, default=1.
 
     Returns
     ------
@@ -492,7 +492,7 @@ def create_slurm_script(fname, filename_g16, nodes, partition, mem, time="168:00
     mem : int
         An integer representing the amount (in GB) of memory requested. Must be specified to access relevant SLURM environmental variables.
     time : str, Optional, default="168:00:00"
-        Job WallClock Max before job is killed. Default is 7 days.
+        Job WallClock Max before job is killed. Optional, default="168:00:00", or 7 days.
     filename_stout : str, Optional, default=None
         Filename for standard output, default is: ``stout_{fname.split(os.sep)[-1]}.txt``
     filename_sterr : str, Optional, default=None
@@ -529,7 +529,7 @@ def create_slurm_script(fname, filename_g16, nodes, partition, mem, time="168:00
     output = []
     for i,line in enumerate(template):
         if i in lines:
-            if i == 11 and log_path ==None:
+            if i == 11 and log_path == None:
                 continue
             output.append(lines[i])
         else:
@@ -556,9 +556,9 @@ def create_arkane_input(name, freq_log, pcm_log=None, linear=False, spinMultipli
         A str specifying the relative path of the PCM calculation file from which energies are to be used for the Arkane calculation. Optional, defaults to None. This file should be in the same directory as the function is run.
     linear : bool
         A boolean specifying whether molecule is linear. Defaults to False.
-    spinMultiplicity : int
+    spinMultiplicity : int, Optional, default=1
         A (positive) integer representing the spin state of the system. Defaults to 1, meaning all electrons are spin paired within the system.
-    opticalIsomers : int
+    opticalIsomers : int, Optional, default=1
         An integer representing the number of optical isomers the molecule has. Defaults to 1, meaning no chirality.
     kwargs_lot : dict, Optional, default={}
         Keyword arguements for the level of theory specifications in Arkane. See ``write_arkane_input_header`` for options.
@@ -601,7 +601,21 @@ def create_arkane_input(name, freq_log, pcm_log=None, linear=False, spinMultipli
                 ]
             )
 
-    write_arkane_input_header("input.py", **kwargs_lot)
+    if os.path.exists("input.py"):    
+        topOfFile = True
+        with open("input.py", "r") as i:
+            lines = i.readlines()
+        for line in lines:
+            if "LevelOfTheory" in line or "atomEnergies" in line or "frequencyScaleFactor" in line:
+                topOfFile = False
+
+        if topOfFile:
+            write_arkane_input_header("input.py", **kwargs_lot)
+
+    else:
+        with open("input.py", "w") as i:
+            write_arkane_input_header("input.py", **kwargs_lot)
+
     with open("input.py", "a") as i:
         i.writelines(
             ["\n\n", f"species('{name}', '{name}.py')\n", f"thermo('{name}', 'NASA')\n\n"]
