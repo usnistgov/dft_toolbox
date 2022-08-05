@@ -1,0 +1,859 @@
+ Entering Gaussian System, Link 0=g16
+ Initial command:
+ /share/sw/gaussian/g16_B.01_avx2-enabled/g16/l1.exe "/scratch/hnr2/2610913/Gau-8933.inp" -scrdir="/scratch/hnr2/2610913/"
+ Entering Link 1 = /share/sw/gaussian/g16_B.01_avx2-enabled/g16/l1.exe PID=      8935.
+  
+ Copyright (c) 1988-2017, Gaussian, Inc.  All Rights Reserved.
+  
+ This is part of the Gaussian(R) 16 program.  It is based on
+ the Gaussian(R) 09 system (copyright 2009, Gaussian, Inc.),
+ the Gaussian(R) 03 system (copyright 2003, Gaussian, Inc.),
+ the Gaussian(R) 98 system (copyright 1998, Gaussian, Inc.),
+ the Gaussian(R) 94 system (copyright 1995, Gaussian, Inc.),
+ the Gaussian 92(TM) system (copyright 1992, Gaussian, Inc.),
+ the Gaussian 90(TM) system (copyright 1990, Gaussian, Inc.),
+ the Gaussian 88(TM) system (copyright 1988, Gaussian, Inc.),
+ the Gaussian 86(TM) system (copyright 1986, Carnegie Mellon
+ University), and the Gaussian 82(TM) system (copyright 1983,
+ Carnegie Mellon University). Gaussian is a federally registered
+ trademark of Gaussian, Inc.
+  
+ This software contains proprietary and confidential information,
+ including trade secrets, belonging to Gaussian, Inc.
+  
+ This software is provided under written license and may be
+ used, copied, transmitted, or stored only in accord with that
+ written license.
+  
+ The following legend is applicable only to US Government
+ contracts under FAR:
+  
+                    RESTRICTED RIGHTS LEGEND
+  
+ Use, reproduction and disclosure by the US Government is
+ subject to restrictions as set forth in subparagraphs (a)
+ and (c) of the Commercial Computer Software - Restricted
+ Rights clause in FAR 52.227-19.
+  
+ Gaussian, Inc.
+ 340 Quinnipiac St., Bldg. 40, Wallingford CT 06492
+  
+  
+ ---------------------------------------------------------------
+ Warning -- This program may not be used in any manner that
+ competes with the business of Gaussian, Inc. or will provide
+ assistance to any competitor of Gaussian, Inc.  The licensee
+ of this program is prohibited from giving any competitor of
+ Gaussian, Inc. access to this program.  By using this program,
+ the user acknowledges that Gaussian, Inc. is engaged in the
+ business of creating and licensing software in the field of
+ computational chemistry and represents and warrants to the
+ licensee that it is not a competitor of Gaussian, Inc. and that
+ it will not use this program in any manner prohibited above.
+ ---------------------------------------------------------------
+  
+
+ Cite this work as:
+ Gaussian 16, Revision B.01,
+ M. J. Frisch, G. W. Trucks, H. B. Schlegel, G. E. Scuseria, 
+ M. A. Robb, J. R. Cheeseman, G. Scalmani, V. Barone, 
+ G. A. Petersson, H. Nakatsuji, X. Li, M. Caricato, A. V. Marenich, 
+ J. Bloino, B. G. Janesko, R. Gomperts, B. Mennucci, H. P. Hratchian, 
+ J. V. Ortiz, A. F. Izmaylov, J. L. Sonnenberg, D. Williams-Young, 
+ F. Ding, F. Lipparini, F. Egidi, J. Goings, B. Peng, A. Petrone, 
+ T. Henderson, D. Ranasinghe, V. G. Zakrzewski, J. Gao, N. Rega, 
+ G. Zheng, W. Liang, M. Hada, M. Ehara, K. Toyota, R. Fukuda, 
+ J. Hasegawa, M. Ishida, T. Nakajima, Y. Honda, O. Kitao, H. Nakai, 
+ T. Vreven, K. Throssell, J. A. Montgomery, Jr., J. E. Peralta, 
+ F. Ogliaro, M. J. Bearpark, J. J. Heyd, E. N. Brothers, K. N. Kudin, 
+ V. N. Staroverov, T. A. Keith, R. Kobayashi, J. Normand, 
+ K. Raghavachari, A. P. Rendell, J. C. Burant, S. S. Iyengar, 
+ J. Tomasi, M. Cossi, J. M. Millam, M. Klene, C. Adamo, R. Cammi, 
+ J. W. Ochterski, R. L. Martin, K. Morokuma, O. Farkas, 
+ J. B. Foresman, and D. J. Fox, Gaussian, Inc., Wallingford CT, 2016.
+ 
+ ******************************************
+ Gaussian 16:  ES64L-G16RevB.01 20-Dec-2017
+                11-Jul-2022 
+ ******************************************
+ %mem=60GB
+ %nprocshared=40
+ Will use up to   40 processors via shared memory.
+ %chk=H2O.chk
+ ----------------------------------------------------------------------
+ # scrf=(solvent=water,iefpcm,externaliteration,1stvac,read) rb3lyp/aug
+ -cc-pvdz empiricaldispersion=gd3 int(grid=ultrafine) scf=(maxcycle=500
+ )
+ ----------------------------------------------------------------------
+ 1/28=-2,30=1,38=1,70=10002203,72=1,125=1000,172=1/1,24;
+ 2/12=2,17=6,18=5,40=1/2;
+ 3/5=16,7=10,11=2,25=1,30=1,70=1000100,72=1,74=-5,75=-5,116=1,124=31/1,2,3;
+ 4/9=2/1;
+ 5/5=2,7=500,17=20,38=5,53=1/2;
+ 6/7=2,8=2,9=2,10=2,28=1/1;
+ 1/28=-2,70=10002205,72=1/24(1);
+ 99/5=1,9=1/99;
+ 3/5=16,7=10,11=2,25=1,30=1,70=100,72=1,74=-5,75=-5,116=1,124=31/1,2,3;
+ 4/5=5,9=2,16=3,69=1/1;
+ 5/5=2,7=500,17=20,38=5,53=1/2;
+ 6/7=2,8=2,9=2,10=2,28=1/1;
+ 1/28=-2,70=10002205,72=1/24(-4);
+ 99/5=1,9=1/99;
+ ---------------------------
+ SP PCM job for MD frame H2O
+ ---------------------------
+ Symbolic Z-matrix:
+ Charge =  0 Multiplicity = 1
+ O                     0.        0.        0.11781 
+ H                     0.       -0.76419  -0.47122 
+ H                     0.        0.76419  -0.47122 
+ 
+ SC-PCM: Self-consistent PCM reaction field calculation.
+ Using the following non-standard input for PCM:
+ dis
+ cav
+ rep
+ --- end of non-standard input.
+ ------------------------------------------------------------------------------
+ Polarizable Continuum Model (PCM)
+ =================================
+ Model                : PCM.
+ Atomic radii         : UFF (Universal Force Field).
+ Polarization charges : Total charges.
+ Charge compensation  : None.
+ Solution method      : On-the-fly selection.
+ Cavity type          : Scaled VdW (van der Waals Surface) (Alpha=1.100).
+ Cavity algorithm     : GePol (No added spheres)
+                        Default sphere list used, NSphG=    3.
+                        Lebedev-Laikov grids with approx.  5.0 points / Ang**2.
+                        Smoothing algorithm: York/Karplus (Gamma=1.0000).
+                        Polarization charges: spherical gaussians, with
+                                              point-specific exponents (IZeta= 3).
+                        Self-potential: point-specific (ISelfS= 7).
+                        Self-field    : sphere-specific E.n sum rule (ISelfD= 2).
+ Solvent              : Water, Eps=  78.355300 Eps(inf)=   1.777849
+ ------------------------------------------------------------------------------
+ Spheres list:
+ ISph  on   Nord     Re0    Alpha      Xe            Ye            Ze
+    1   O      1    1.7500  1.100      0.000000      0.000000      0.117806
+    2   H      2    1.4430  1.100      0.000000     -0.764190     -0.471223
+    3   H      3    1.4430  1.100      0.000000      0.764190     -0.471223
+ ------------------------------------------------------------------------------
+ SC-PCM: Now performing the calculation in vacuo, IExtIt=   0.
+                          Input orientation:                          
+ ---------------------------------------------------------------------
+ Center     Atomic      Atomic             Coordinates (Angstroms)
+ Number     Number       Type             X           Y           Z
+ ---------------------------------------------------------------------
+      1          8           0        0.000000    0.000000    0.117806
+      2          1           0        0.000000   -0.764190   -0.471223
+      3          1           0        0.000000    0.764190   -0.471223
+ ---------------------------------------------------------------------
+                    Distance matrix (angstroms):
+                    1          2          3
+     1  O    0.000000
+     2  H    0.964853   0.000000
+     3  H    0.964853   1.528380   0.000000
+ Stoichiometry    H2O
+ Framework group  C2V[C2(O),SGV(H2)]
+ Deg. of freedom     2
+ Full point group                 C2V     NOp   4
+ Largest Abelian subgroup         C2V     NOp   4
+ Largest concise Abelian subgroup C2      NOp   2
+                         Standard orientation:                         
+ ---------------------------------------------------------------------
+ Center     Atomic      Atomic             Coordinates (Angstroms)
+ Number     Number       Type             X           Y           Z
+ ---------------------------------------------------------------------
+      1          8           0        0.000000    0.000000    0.117806
+      2          1           0        0.000000    0.764190   -0.471223
+      3          1           0       -0.000000   -0.764190   -0.471223
+ ---------------------------------------------------------------------
+ Rotational constants (GHZ):         813.7183502         429.3380310         281.0493872
+ Standard basis: Aug-CC-pVDZ (5D, 7F)
+ There are    20 symmetry adapted cartesian basis functions of A1  symmetry.
+ There are     4 symmetry adapted cartesian basis functions of A2  symmetry.
+ There are     7 symmetry adapted cartesian basis functions of B1  symmetry.
+ There are    12 symmetry adapted cartesian basis functions of B2  symmetry.
+ There are    18 symmetry adapted basis functions of A1  symmetry.
+ There are     4 symmetry adapted basis functions of A2  symmetry.
+ There are     7 symmetry adapted basis functions of B1  symmetry.
+ There are    12 symmetry adapted basis functions of B2  symmetry.
+    41 basis functions,    65 primitive gaussians,    43 cartesian basis functions
+     5 alpha electrons        5 beta electrons
+       nuclear repulsion energy         9.1214924992 Hartrees.
+ NAtoms=    3 NActive=    3 NUniq=    2 SFac= 2.25D+00 NAtFMM=   60 NAOKFM=F Big=F
+ Integral buffers will be    131072 words long.
+ Raffenetti 2 integral format.
+ Two-electron integral symmetry is turned on.
+ Nuclear repulsion after empirical dispersion term =        9.1214840265 Hartrees.
+ One-electron integrals computed using PRISM.
+ NBasis=    41 RedAO= T EigKep=  2.76D-03  NBF=    18     4     7    12
+ NBsUse=    41 1.00D-06 EigRej= -1.00D+00 NBFU=    18     4     7    12
+ SCF N**3 symmetry information disabled.
+ ExpMin= 2.97D-02 ExpMax= 1.17D+04 ExpMxC= 4.01D+02 IAcc=3 IRadAn=         5 AccDes= 0.00D+00
+ Harris functional with IExCor=  402 and IRadAn=       5 diagonalized for initial guess.
+ HarFok:  IExCor=  402 AccDes= 0.00D+00 IRadAn=         5 IDoV= 1 UseB2=F ITyADJ=14
+ ICtDFT=  3500011 ScaDFX=  1.000000  1.000000  1.000000  1.000000
+ FoFCou: FMM=F IPFlag=           0 FMFlag=      100000 FMFlg1=           0
+         NFxFlg=           0 DoJE=T BraDBF=F KetDBF=T FulRan=T
+         wScrn=  0.000000 ICntrl=       500 IOpCl=  0 I1Cent=   200000004 NGrid=           0
+         NMat0=    1 NMatS0=      1 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
+ Petite list used in FoFCou.
+ Initial guess orbital symmetries:
+       Occupied  (A1) (A1) (B2) (A1) (B1)
+       Virtual   (A1) (B2) (A1) (B1) (A1) (B2) (B2) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (B2) (A1) (B1) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (A2) (B1) (B2) (A1) (A1) (B2)
+                 (A1) (B1) (A1) (A2) (A1) (B2)
+ The electronic state of the initial guess is 1-A1.
+ Keep R1 ints in memory in symmetry-blocked form, NReq=34953572.
+ Requested convergence on RMS density matrix=1.00D-08 within 500 cycles.
+ Requested convergence on MAX density matrix=1.00D-06.
+ Requested convergence on             energy=1.00D-06.
+ No special actions if energy rises.
+ SCF Done:  E(RB3LYP) =  -76.4446520622     A.U. after    8 cycles
+            NFock=  8  Conv=0.38D-08     -V/T= 2.0063
+
+ **********************************************************************
+
+            Population analysis using the SCF Density.
+
+ **********************************************************************
+
+ Orbital symmetries:
+       Occupied  (A1) (A1) (B2) (A1) (B1)
+       Virtual   (A1) (B2) (A1) (B1) (A1) (B2) (B2) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (B2) (A1) (B1) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (A2) (B1) (A1) (B2) (A1) (B2)
+                 (A1) (B1) (A1) (A2) (A1) (B2)
+ The electronic state is 1-A1.
+ Alpha  occ. eigenvalues --  -19.16135  -1.02242  -0.53963  -0.39945  -0.32315
+ Alpha virt. eigenvalues --   -0.02495   0.02253   0.10008   0.11894   0.13022
+ Alpha virt. eigenvalues --    0.14912   0.17724   0.22117   0.27422   0.28892
+ Alpha virt. eigenvalues --    0.31734   0.43579   0.49985   0.52079   0.62202
+ Alpha virt. eigenvalues --    0.73557   0.90238   0.91560   0.95065   1.06178
+ Alpha virt. eigenvalues --    1.18758   1.21673   1.30596   1.73161   1.74884
+ Alpha virt. eigenvalues --    1.84076   2.10991   2.12919   2.27256   2.39852
+ Alpha virt. eigenvalues --    2.64265   3.28459   3.29763   3.31081   3.61369
+ Alpha virt. eigenvalues --    3.87003
+          Condensed to atoms (all electrons):
+               1          2          3
+     1  O    7.527404   0.319755   0.319755
+     2  H    0.319755   0.683270  -0.086482
+     3  H    0.319755  -0.086482   0.683270
+ Mulliken charges:
+               1
+     1  O   -0.166914
+     2  H    0.083457
+     3  H    0.083457
+ Sum of Mulliken charges =   0.00000
+ Mulliken charges with hydrogens summed into heavy atoms:
+               1
+     1  O    0.000000
+ Electronic spatial extent (au):  <R**2>=             20.1814
+ Charge=              0.0000 electrons
+ Dipole moment (field-independent basis, Debye):
+    X=              0.0000    Y=              0.0000    Z=             -1.8537  Tot=              1.8537
+ Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=             -7.8194   YY=             -4.5289   ZZ=             -6.5200
+   XY=             -0.0000   XZ=             -0.0000   YZ=             -0.0000
+ Traceless Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=             -1.5299   YY=              1.7606   ZZ=             -0.2306
+   XY=             -0.0000   XZ=             -0.0000   YZ=             -0.0000
+ Octapole moment (field-independent basis, Debye-Ang**2):
+  XXX=              0.0000  YYY=              0.0000  ZZZ=             -0.9594  XYY=              0.0000
+  XXY=              0.0000  XXZ=             -0.2237  XZZ=             -0.0000  YZZ=              0.0000
+  YYZ=             -1.2601  XYZ=             -0.0000
+ Hexadecapole moment (field-independent basis, Debye-Ang**3):
+ XXXX=             -7.9405 YYYY=             -6.9324 ZZZZ=             -8.3520 XXXY=             -0.0000
+ XXXZ=             -0.0000 YYYX=             -0.0000 YYYZ=             -0.0000 ZZZX=             -0.0000
+ ZZZY=             -0.0000 XXYY=             -2.8100 XXZZ=             -2.7631 YYZZ=             -2.2793
+ XXYZ=             -0.0000 YYXZ=             -0.0000 ZZXY=             -0.0000
+ N-N= 9.121484026472D+00 E-N=-1.987912193118D+02  KE= 7.596285149820D+01
+ SC-PCM: Now building the cavity and doing the perturbative PCM calculation.
+ SC-PCM: Using the SCF Density.
+ Inv3:  Mode=1 IEnd=      460992.
+ Iteration    1 A*A^-1 deviation from unit magnitude is 3.11D-15 for    182.
+ Iteration    1 A*A^-1 deviation from orthogonality  is 2.66D-15 for    257     29.
+ Iteration    1 A^-1*A deviation from unit magnitude is 3.11D-15 for    182.
+ Iteration    1 A^-1*A deviation from orthogonality  is 1.55D-15 for    192     93.
+ With in-vacuo wavefunction:
+ Error on total polarization charges =  0.00762
+ SC-PCM: The total energy in vacuo is       -76.444652062 a.u.
+ SC-PCM: The total energy including the PCM contribution is       -76.450369475 a.u.
+ SC-PCM: Iterating to achieve self-consistent PCM reaction field, IExtIt=   1.
+ Standard basis: Aug-CC-pVDZ (5D, 7F)
+ There are    20 symmetry adapted cartesian basis functions of A1  symmetry.
+ There are     4 symmetry adapted cartesian basis functions of A2  symmetry.
+ There are     7 symmetry adapted cartesian basis functions of B1  symmetry.
+ There are    12 symmetry adapted cartesian basis functions of B2  symmetry.
+ There are    18 symmetry adapted basis functions of A1  symmetry.
+ There are     4 symmetry adapted basis functions of A2  symmetry.
+ There are     7 symmetry adapted basis functions of B1  symmetry.
+ There are    12 symmetry adapted basis functions of B2  symmetry.
+    41 basis functions,    65 primitive gaussians,    43 cartesian basis functions
+     5 alpha electrons        5 beta electrons
+       nuclear repulsion energy         9.1214924992 Hartrees.
+ NAtoms=    3 NActive=    3 NUniq=    2 SFac= 2.25D+00 NAtFMM=   60 NAOKFM=F Big=F
+ Integral buffers will be    131072 words long.
+ Raffenetti 2 integral format.
+ Two-electron integral symmetry is turned on.
+ Nuclei-solvent charges/DBFs interaction =         0.0150663748 a.u.
+ Nuclear repulsion after self-consistent solvent charges =        9.1365588740 Hartrees.
+ Nuclear repulsion after empirical dispersion term =        9.1365504013 Hartrees.
+ One-electron integrals computed using PRISM.
+ NBasis=    41 RedAO= T EigKep=  2.76D-03  NBF=    18     4     7    12
+ NBsUse=    41 1.00D-06 EigRej= -1.00D+00 NBFU=    18     4     7    12
+ Initial guess from the checkpoint file:  "H2O.chk"
+ SCF N**3 symmetry information disabled.
+ B after Tr=     0.000000   -0.000000    0.000000
+         Rot=    1.000000   -0.000000   -0.000000   -0.000000 Ang=   0.00 deg.
+ Initial guess orbital symmetries:
+       Occupied  (A1) (A1) (B2) (A1) (B1)
+       Virtual   (A1) (B2) (A1) (B1) (A1) (B2) (B2) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (B2) (A1) (B1) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (A2) (B1) (A1) (B2) (A1) (B2)
+                 (A1) (B1) (A1) (A2) (A1) (B2)
+ ExpMin= 2.97D-02 ExpMax= 1.17D+04 ExpMxC= 4.01D+02 IAcc=3 IRadAn=         5 AccDes= 0.00D+00
+ Harris functional with IExCor=  402 and IRadAn=       5 diagonalized for initial guess.
+ HarFok:  IExCor=  402 AccDes= 0.00D+00 IRadAn=         5 IDoV= 1 UseB2=F ITyADJ=14
+ ICtDFT=  3500011 ScaDFX=  1.000000  1.000000  1.000000  1.000000
+ FoFCou: FMM=F IPFlag=           0 FMFlag=      100000 FMFlg1=           0
+         NFxFlg=           0 DoJE=T BraDBF=F KetDBF=T FulRan=T
+         wScrn=  0.000000 ICntrl=       500 IOpCl=  0 I1Cent=   200000004 NGrid=           0
+         NMat0=    1 NMatS0=      1 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
+ Petite list used in FoFCou.
+ Keep R1 ints in memory in symmetry-blocked form, NReq=34953572.
+ Requested convergence on RMS density matrix=1.00D-08 within 500 cycles.
+ Requested convergence on MAX density matrix=1.00D-06.
+ Requested convergence on             energy=1.00D-06.
+ No special actions if energy rises.
+ EnCoef did   100 forward-backward iterations
+ SCF Done:  E(RB3LYP) =  -76.4503710637     A.U. after    8 cycles
+            NFock=  8  Conv=0.63D-09     -V/T= 2.0065
+
+ **********************************************************************
+
+            Population analysis using the SCF Density.
+
+ **********************************************************************
+
+ Orbital symmetries:
+       Occupied  (A1) (A1) (B2) (A1) (B1)
+       Virtual   (A1) (B2) (A1) (B1) (A1) (B2) (B2) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (B2) (A1) (B1) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (A2) (B1) (A1) (B2) (A1) (B2)
+                 (A1) (B1) (A1) (A2) (A1) (B2)
+ The electronic state is 1-A1.
+ Alpha  occ. eigenvalues --  -19.16165  -1.02231  -0.53840  -0.40269  -0.32629
+ Alpha virt. eigenvalues --   -0.01792   0.03067   0.09856   0.10965   0.12776
+ Alpha virt. eigenvalues --    0.15845   0.17387   0.22306   0.28175   0.29167
+ Alpha virt. eigenvalues --    0.32198   0.44672   0.50964   0.52935   0.62500
+ Alpha virt. eigenvalues --    0.73654   0.89231   0.90818   0.94916   1.06404
+ Alpha virt. eigenvalues --    1.18796   1.21318   1.30015   1.73627   1.75050
+ Alpha virt. eigenvalues --    1.84419   2.11222   2.13465   2.27846   2.40022
+ Alpha virt. eigenvalues --    2.64256   3.28131   3.29557   3.30906   3.61325
+ Alpha virt. eigenvalues --    3.86986
+          Condensed to atoms (all electrons):
+               1          2          3
+     1  O    7.595825   0.312328   0.312328
+     2  H    0.312328   0.669886  -0.092454
+     3  H    0.312328  -0.092454   0.669886
+ Mulliken charges:
+               1
+     1  O   -0.220481
+     2  H    0.110241
+     3  H    0.110241
+ Sum of Mulliken charges =  -0.00000
+ Mulliken charges with hydrogens summed into heavy atoms:
+               1
+     1  O   -0.000000
+ Electronic spatial extent (au):  <R**2>=             20.1535
+ Charge=             -0.0000 electrons
+ Dipole moment (field-independent basis, Debye):
+    X=              0.0000    Y=             -0.0000    Z=             -2.1115  Tot=              2.1115
+ Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=             -7.8780   YY=             -4.4423   ZZ=             -6.5104
+   XY=             -0.0000   XZ=              0.0000   YZ=              0.0000
+ Traceless Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=             -1.6011   YY=              1.8346   ZZ=             -0.2335
+   XY=             -0.0000   XZ=              0.0000   YZ=              0.0000
+ Octapole moment (field-independent basis, Debye-Ang**2):
+  XXX=              0.0000  YYY=              0.0000  ZZZ=             -1.3613  XYY=              0.0000
+  XXY=              0.0000  XXZ=             -0.3518  XZZ=              0.0000  YZZ=             -0.0000
+  YYZ=             -1.4383  XYZ=              0.0000
+ Hexadecapole moment (field-independent basis, Debye-Ang**3):
+ XXXX=             -8.2359 YYYY=             -6.7312 ZZZZ=             -8.3923 XXXY=             -0.0000
+ XXXZ=              0.0000 YYYX=             -0.0000 YYYZ=             -0.0000 ZZZX=              0.0000
+ ZZZY=              0.0000 XXYY=             -2.8303 XXZZ=             -2.8231 YYZZ=             -2.2213
+ XXYZ=              0.0000 YYXZ=              0.0000 ZZXY=             -0.0000
+ N-N= 9.136550401300D+00 E-N=-1.988118107535D+02  KE= 7.595331006796D+01
+ SC-PCM: Using the SCF Density.
+ SC-PCM: The equilibrium contribution to the free energy is   -0.006981601 a.u.
+ SC-PCM: The total energy including the PCM contribution is       -76.451040948 a.u.
+ SC-PCM: Erms=  0.11627D-03 Emax=  0.23738D-03 Qconv=  0.10000D-06
+ SC-PCM: Iterating to achieve self-consistent PCM reaction field, IExtIt=   2.
+ Standard basis: Aug-CC-pVDZ (5D, 7F)
+ There are    20 symmetry adapted cartesian basis functions of A1  symmetry.
+ There are     4 symmetry adapted cartesian basis functions of A2  symmetry.
+ There are     7 symmetry adapted cartesian basis functions of B1  symmetry.
+ There are    12 symmetry adapted cartesian basis functions of B2  symmetry.
+ There are    18 symmetry adapted basis functions of A1  symmetry.
+ There are     4 symmetry adapted basis functions of A2  symmetry.
+ There are     7 symmetry adapted basis functions of B1  symmetry.
+ There are    12 symmetry adapted basis functions of B2  symmetry.
+    41 basis functions,    65 primitive gaussians,    43 cartesian basis functions
+     5 alpha electrons        5 beta electrons
+       nuclear repulsion energy         9.1214924992 Hartrees.
+ NAtoms=    3 NActive=    3 NUniq=    2 SFac= 2.25D+00 NAtFMM=   60 NAOKFM=F Big=F
+ Integral buffers will be    131072 words long.
+ Raffenetti 2 integral format.
+ Two-electron integral symmetry is turned on.
+ Nuclei-solvent charges/DBFs interaction =         0.0161753774 a.u.
+ Nuclear repulsion after self-consistent solvent charges =        9.1376678766 Hartrees.
+ Nuclear repulsion after empirical dispersion term =        9.1376594039 Hartrees.
+ One-electron integrals computed using PRISM.
+ NBasis=    41 RedAO= T EigKep=  2.76D-03  NBF=    18     4     7    12
+ NBsUse=    41 1.00D-06 EigRej= -1.00D+00 NBFU=    18     4     7    12
+ Initial guess from the checkpoint file:  "H2O.chk"
+ SCF N**3 symmetry information disabled.
+ B after Tr=     0.000000    0.000000    0.000000
+         Rot=    1.000000    0.000000    0.000000    0.000000 Ang=   0.00 deg.
+ Initial guess orbital symmetries:
+       Occupied  (A1) (A1) (B2) (A1) (B1)
+       Virtual   (A1) (B2) (A1) (B1) (A1) (B2) (B2) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (B2) (A1) (B1) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (A2) (B1) (A1) (B2) (A1) (B2)
+                 (A1) (B1) (A1) (A2) (A1) (B2)
+ ExpMin= 2.97D-02 ExpMax= 1.17D+04 ExpMxC= 4.01D+02 IAcc=3 IRadAn=         5 AccDes= 0.00D+00
+ Harris functional with IExCor=  402 and IRadAn=       5 diagonalized for initial guess.
+ HarFok:  IExCor=  402 AccDes= 0.00D+00 IRadAn=         5 IDoV= 1 UseB2=F ITyADJ=14
+ ICtDFT=  3500011 ScaDFX=  1.000000  1.000000  1.000000  1.000000
+ FoFCou: FMM=F IPFlag=           0 FMFlag=      100000 FMFlg1=           0
+         NFxFlg=           0 DoJE=T BraDBF=F KetDBF=T FulRan=T
+         wScrn=  0.000000 ICntrl=       500 IOpCl=  0 I1Cent=   200000004 NGrid=           0
+         NMat0=    1 NMatS0=      1 NMatT0=    0 NMatD0=    1 NMtDS0=    0 NMtDT0=    0
+ Petite list used in FoFCou.
+ Keep R1 ints in memory in symmetry-blocked form, NReq=34953572.
+ Requested convergence on RMS density matrix=1.00D-08 within 500 cycles.
+ Requested convergence on MAX density matrix=1.00D-06.
+ Requested convergence on             energy=1.00D-06.
+ No special actions if energy rises.
+ SCF Done:  E(RB3LYP) =  -76.4509659401     A.U. after    8 cycles
+            NFock=  8  Conv=0.84D-10     -V/T= 2.0066
+
+ **********************************************************************
+
+            Population analysis using the SCF Density.
+
+ **********************************************************************
+
+ Orbital symmetries:
+       Occupied  (A1) (A1) (B2) (A1) (B1)
+       Virtual   (A1) (B2) (A1) (B1) (A1) (B2) (B2) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (B2) (A1) (B1) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (A2) (B1) (A1) (B2) (A1) (B2)
+                 (A1) (B1) (A1) (A2) (A1) (B2)
+ The electronic state is 1-A1.
+ Alpha  occ. eigenvalues --  -19.16157  -1.02217  -0.53826  -0.40301  -0.32643
+ Alpha virt. eigenvalues --   -0.01727   0.03130   0.09813   0.10892   0.12750
+ Alpha virt. eigenvalues --    0.15884   0.17357   0.22340   0.28268   0.29233
+ Alpha virt. eigenvalues --    0.32296   0.44762   0.51069   0.53006   0.62537
+ Alpha virt. eigenvalues --    0.73684   0.89128   0.90724   0.94905   1.06440
+ Alpha virt. eigenvalues --    1.18836   1.21261   1.29956   1.73673   1.75080
+ Alpha virt. eigenvalues --    1.84484   2.11252   2.13526   2.27917   2.40051
+ Alpha virt. eigenvalues --    2.64268   3.28109   3.29539   3.30895   3.61329
+ Alpha virt. eigenvalues --    3.86984
+          Condensed to atoms (all electrons):
+               1          2          3
+     1  O    7.603066   0.311720   0.311720
+     2  H    0.311720   0.667601  -0.092575
+     3  H    0.311720  -0.092575   0.667601
+ Mulliken charges:
+               1
+     1  O   -0.226507
+     2  H    0.113253
+     3  H    0.113253
+ Sum of Mulliken charges =  -0.00000
+ Mulliken charges with hydrogens summed into heavy atoms:
+               1
+     1  O   -0.000000
+ Electronic spatial extent (au):  <R**2>=             20.1521
+ Charge=             -0.0000 electrons
+ Dipole moment (field-independent basis, Debye):
+    X=             -0.0000    Y=             -0.0000    Z=             -2.1457  Tot=              2.1457
+ Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=             -7.8826   YY=             -4.4359   ZZ=             -6.5103
+   XY=             -0.0000   XZ=              0.0000   YZ=             -0.0000
+ Traceless Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=             -1.6063   YY=              1.8403   ZZ=             -0.2340
+   XY=             -0.0000   XZ=              0.0000   YZ=             -0.0000
+ Octapole moment (field-independent basis, Debye-Ang**2):
+  XXX=             -0.0000  YYY=             -0.0000  ZZZ=             -1.4148  XYY=             -0.0000
+  XXY=             -0.0000  XXZ=             -0.3690  XZZ=             -0.0000  YZZ=              0.0000
+  YYZ=             -1.4596  XYZ=             -0.0000
+ Hexadecapole moment (field-independent basis, Debye-Ang**3):
+ XXXX=             -8.2640 YYYY=             -6.7192 ZZZZ=             -8.4017 XXXY=             -0.0000
+ XXXZ=              0.0000 YYYX=             -0.0000 YYYZ=             -0.0000 ZZZX=              0.0000
+ ZZZY=             -0.0000 XXYY=             -2.8325 XXZZ=             -2.8299 YYZZ=             -2.2171
+ XXYZ=             -0.0000 YYXZ=              0.0000 ZZXY=             -0.0000
+ N-N= 9.137659403867D+00 E-N=-1.988138322240D+02  KE= 7.595218223078D+01
+ SC-PCM: Using the SCF Density.
+ SC-PCM: The equilibrium contribution to the free energy is   -0.007152899 a.u.
+ SC-PCM: The total energy including the PCM contribution is       -76.451052253 a.u.
+ SC-PCM: Erms=  0.15301D-04 Emax=  0.32634D-04 Qconv=  0.10000D-06
+ SC-PCM: Iterating to achieve self-consistent PCM reaction field, IExtIt=   3.
+ Standard basis: Aug-CC-pVDZ (5D, 7F)
+ There are    20 symmetry adapted cartesian basis functions of A1  symmetry.
+ There are     4 symmetry adapted cartesian basis functions of A2  symmetry.
+ There are     7 symmetry adapted cartesian basis functions of B1  symmetry.
+ There are    12 symmetry adapted cartesian basis functions of B2  symmetry.
+ There are    18 symmetry adapted basis functions of A1  symmetry.
+ There are     4 symmetry adapted basis functions of A2  symmetry.
+ There are     7 symmetry adapted basis functions of B1  symmetry.
+ There are    12 symmetry adapted basis functions of B2  symmetry.
+    41 basis functions,    65 primitive gaussians,    43 cartesian basis functions
+     5 alpha electrons        5 beta electrons
+       nuclear repulsion energy         9.1214924992 Hartrees.
+ NAtoms=    3 NActive=    3 NUniq=    2 SFac= 2.25D+00 NAtFMM=   60 NAOKFM=F Big=F
+ Integral buffers will be    131072 words long.
+ Raffenetti 2 integral format.
+ Two-electron integral symmetry is turned on.
+ Nuclei-solvent charges/DBFs interaction =         0.0162826301 a.u.
+ Nuclear repulsion after self-consistent solvent charges =        9.1377751292 Hartrees.
+ Nuclear repulsion after empirical dispersion term =        9.1377666565 Hartrees.
+ One-electron integrals computed using PRISM.
+ NBasis=    41 RedAO= T EigKep=  2.76D-03  NBF=    18     4     7    12
+ NBsUse=    41 1.00D-06 EigRej= -1.00D+00 NBFU=    18     4     7    12
+ Initial guess from the checkpoint file:  "H2O.chk"
+ SCF N**3 symmetry information disabled.
+ B after Tr=     0.000000    0.000000    0.000000
+         Rot=    1.000000    0.000000    0.000000    0.000000 Ang=   0.00 deg.
+ Initial guess orbital symmetries:
+       Occupied  (A1) (A1) (B2) (A1) (B1)
+       Virtual   (A1) (B2) (A1) (B1) (A1) (B2) (B2) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (B2) (A1) (B1) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (A2) (B1) (A1) (B2) (A1) (B2)
+                 (A1) (B1) (A1) (A2) (A1) (B2)
+ Keep R1 ints in memory in symmetry-blocked form, NReq=34953572.
+ Requested convergence on RMS density matrix=1.00D-08 within 500 cycles.
+ Requested convergence on MAX density matrix=1.00D-06.
+ Requested convergence on             energy=1.00D-06.
+ No special actions if energy rises.
+ SCF Done:  E(RB3LYP) =  -76.4510410321     A.U. after    7 cycles
+            NFock=  7  Conv=0.13D-09     -V/T= 2.0066
+
+ **********************************************************************
+
+            Population analysis using the SCF Density.
+
+ **********************************************************************
+
+ Orbital symmetries:
+       Occupied  (A1) (A1) (B2) (A1) (B1)
+       Virtual   (A1) (B2) (A1) (B1) (A1) (B2) (B2) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (B2) (A1) (B1) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (A2) (B1) (A1) (B2) (A1) (B2)
+                 (A1) (B1) (A1) (A2) (A1) (B2)
+ The electronic state is 1-A1.
+ Alpha  occ. eigenvalues --  -19.16155  -1.02214  -0.53823  -0.40304  -0.32644
+ Alpha virt. eigenvalues --   -0.01719   0.03137   0.09807   0.10884   0.12747
+ Alpha virt. eigenvalues --    0.15887   0.17354   0.22345   0.28281   0.29242
+ Alpha virt. eigenvalues --    0.32310   0.44772   0.51083   0.53014   0.62542
+ Alpha virt. eigenvalues --    0.73689   0.89115   0.90712   0.94904   1.06445
+ Alpha virt. eigenvalues --    1.18842   1.21254   1.29948   1.73679   1.75085
+ Alpha virt. eigenvalues --    1.84493   2.11257   2.13535   2.27927   2.40055
+ Alpha virt. eigenvalues --    2.64270   3.28107   3.29537   3.30894   3.61331
+ Alpha virt. eigenvalues --    3.86984
+          Condensed to atoms (all electrons):
+               1          2          3
+     1  O    7.603986   0.311648   0.311648
+     2  H    0.311648   0.667284  -0.092574
+     3  H    0.311648  -0.092574   0.667284
+ Mulliken charges:
+               1
+     1  O   -0.227283
+     2  H    0.113642
+     3  H    0.113642
+ Sum of Mulliken charges =  -0.00000
+ Mulliken charges with hydrogens summed into heavy atoms:
+               1
+     1  O   -0.000000
+ Electronic spatial extent (au):  <R**2>=             20.1519
+ Charge=              0.0000 electrons
+ Dipole moment (field-independent basis, Debye):
+    X=             -0.0000    Y=              0.0000    Z=             -2.1502  Tot=              2.1502
+ Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=             -7.8831   YY=             -4.4352   ZZ=             -6.5103
+   XY=             -0.0000   XZ=              0.0000   YZ=              0.0000
+ Traceless Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=             -1.6069   YY=              1.8410   ZZ=             -0.2341
+   XY=             -0.0000   XZ=              0.0000   YZ=              0.0000
+ Octapole moment (field-independent basis, Debye-Ang**2):
+  XXX=             -0.0000  YYY=              0.0000  ZZZ=             -1.4220  XYY=             -0.0000
+  XXY=              0.0000  XXZ=             -0.3713  XZZ=             -0.0000  YZZ=              0.0000
+  YYZ=             -1.4623  XYZ=              0.0000
+ Hexadecapole moment (field-independent basis, Debye-Ang**3):
+ XXXX=             -8.2674 YYYY=             -6.7179 ZZZZ=             -8.4031 XXXY=             -0.0000
+ XXXZ=             -0.0000 YYYX=             -0.0000 YYYZ=              0.0000 ZZZX=             -0.0000
+ ZZZY=             -0.0000 XXYY=             -2.8328 XXZZ=             -2.8307 YYZZ=             -2.2167
+ XXYZ=             -0.0000 YYXZ=             -0.0000 ZZXY=             -0.0000
+ N-N= 9.137766656542D+00 E-N=-1.988140864114D+02  KE= 7.595203567817D+01
+ SC-PCM: Using the SCF Density.
+ SC-PCM: The equilibrium contribution to the free energy is   -0.007175718 a.u.
+ SC-PCM: The total energy including the PCM contribution is       -76.451052453 a.u.
+ SC-PCM: Erms=  0.20372D-05 Emax=  0.43652D-05 Qconv=  0.10000D-06
+ SC-PCM: Iterating to achieve self-consistent PCM reaction field, IExtIt=   4.
+ Standard basis: Aug-CC-pVDZ (5D, 7F)
+ There are    20 symmetry adapted cartesian basis functions of A1  symmetry.
+ There are     4 symmetry adapted cartesian basis functions of A2  symmetry.
+ There are     7 symmetry adapted cartesian basis functions of B1  symmetry.
+ There are    12 symmetry adapted cartesian basis functions of B2  symmetry.
+ There are    18 symmetry adapted basis functions of A1  symmetry.
+ There are     4 symmetry adapted basis functions of A2  symmetry.
+ There are     7 symmetry adapted basis functions of B1  symmetry.
+ There are    12 symmetry adapted basis functions of B2  symmetry.
+    41 basis functions,    65 primitive gaussians,    43 cartesian basis functions
+     5 alpha electrons        5 beta electrons
+       nuclear repulsion energy         9.1214924992 Hartrees.
+ NAtoms=    3 NActive=    3 NUniq=    2 SFac= 2.25D+00 NAtFMM=   60 NAOKFM=F Big=F
+ Integral buffers will be    131072 words long.
+ Raffenetti 2 integral format.
+ Two-electron integral symmetry is turned on.
+ Nuclei-solvent charges/DBFs interaction =         0.0162960123 a.u.
+ Nuclear repulsion after self-consistent solvent charges =        9.1377885114 Hartrees.
+ Nuclear repulsion after empirical dispersion term =        9.1377800387 Hartrees.
+ One-electron integrals computed using PRISM.
+ NBasis=    41 RedAO= T EigKep=  2.76D-03  NBF=    18     4     7    12
+ NBsUse=    41 1.00D-06 EigRej= -1.00D+00 NBFU=    18     4     7    12
+ Initial guess from the checkpoint file:  "H2O.chk"
+ SCF N**3 symmetry information disabled.
+ B after Tr=     0.000000    0.000000    0.000000
+         Rot=    1.000000    0.000000    0.000000    0.000000 Ang=   0.00 deg.
+ Initial guess orbital symmetries:
+       Occupied  (A1) (A1) (B2) (A1) (B1)
+       Virtual   (A1) (B2) (A1) (B1) (A1) (B2) (B2) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (B2) (A1) (B1) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (A2) (B1) (A1) (B2) (A1) (B2)
+                 (A1) (B1) (A1) (A2) (A1) (B2)
+ Keep R1 ints in memory in symmetry-blocked form, NReq=34953572.
+ Requested convergence on RMS density matrix=1.00D-08 within 500 cycles.
+ Requested convergence on MAX density matrix=1.00D-06.
+ Requested convergence on             energy=1.00D-06.
+ No special actions if energy rises.
+ SCF Done:  E(RB3LYP) =  -76.4510509390     A.U. after    5 cycles
+            NFock=  5  Conv=0.41D-08     -V/T= 2.0066
+
+ **********************************************************************
+
+            Population analysis using the SCF Density.
+
+ **********************************************************************
+
+ Orbital symmetries:
+       Occupied  (A1) (A1) (B2) (A1) (B1)
+       Virtual   (A1) (B2) (A1) (B1) (A1) (B2) (B2) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (B2) (A1) (B1) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (A2) (B1) (A1) (B2) (A1) (B2)
+                 (A1) (B1) (A1) (A2) (A1) (B2)
+ The electronic state is 1-A1.
+ Alpha  occ. eigenvalues --  -19.16155  -1.02214  -0.53823  -0.40305  -0.32644
+ Alpha virt. eigenvalues --   -0.01718   0.03138   0.09806   0.10883   0.12746
+ Alpha virt. eigenvalues --    0.15888   0.17354   0.22345   0.28283   0.29243
+ Alpha virt. eigenvalues --    0.32311   0.44774   0.51085   0.53015   0.62543
+ Alpha virt. eigenvalues --    0.73689   0.89113   0.90710   0.94904   1.06446
+ Alpha virt. eigenvalues --    1.18843   1.21253   1.29948   1.73680   1.75085
+ Alpha virt. eigenvalues --    1.84495   2.11257   2.13536   2.27928   2.40056
+ Alpha virt. eigenvalues --    2.64270   3.28106   3.29537   3.30894   3.61331
+ Alpha virt. eigenvalues --    3.86984
+          Condensed to atoms (all electrons):
+               1          2          3
+     1  O    7.604108   0.311639   0.311639
+     2  H    0.311639   0.667241  -0.092574
+     3  H    0.311639  -0.092574   0.667241
+ Mulliken charges:
+               1
+     1  O   -0.227386
+     2  H    0.113693
+     3  H    0.113693
+ Sum of Mulliken charges =   0.00000
+ Mulliken charges with hydrogens summed into heavy atoms:
+               1
+     1  O    0.000000
+ Electronic spatial extent (au):  <R**2>=             20.1519
+ Charge=              0.0000 electrons
+ Dipole moment (field-independent basis, Debye):
+    X=             -0.0000    Y=              0.0000    Z=             -2.1508  Tot=              2.1508
+ Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=             -7.8832   YY=             -4.4351   ZZ=             -6.5103
+   XY=              0.0000   XZ=             -0.0000   YZ=             -0.0000
+ Traceless Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=             -1.6070   YY=              1.8411   ZZ=             -0.2341
+   XY=              0.0000   XZ=             -0.0000   YZ=             -0.0000
+ Octapole moment (field-independent basis, Debye-Ang**2):
+  XXX=             -0.0000  YYY=              0.0000  ZZZ=             -1.4229  XYY=             -0.0000
+  XXY=              0.0000  XXZ=             -0.3717  XZZ=             -0.0000  YZZ=              0.0000
+  YYZ=             -1.4627  XYZ=             -0.0000
+ Hexadecapole moment (field-independent basis, Debye-Ang**3):
+ XXXX=             -8.2679 YYYY=             -6.7177 ZZZZ=             -8.4032 XXXY=             -0.0000
+ XXXZ=             -0.0000 YYYX=              0.0000 YYYZ=             -0.0000 ZZZX=             -0.0000
+ ZZZY=             -0.0000 XXYY=             -2.8329 XXZZ=             -2.8308 YYZZ=             -2.2166
+ XXYZ=             -0.0000 YYXZ=              0.0000 ZZXY=              0.0000
+ N-N= 9.137780038747D+00 E-N=-1.988141199820D+02  KE= 7.595201625217D+01
+ SC-PCM: Using the SCF Density.
+ SC-PCM: The equilibrium contribution to the free energy is   -0.007178757 a.u.
+ SC-PCM: The total energy including the PCM contribution is       -76.451052460 a.u.
+ SC-PCM: Erms=  0.27141D-06 Emax=  0.58191D-06 Qconv=  0.10000D-06
+ SC-PCM: Iterating to achieve self-consistent PCM reaction field, IExtIt=   5.
+ Standard basis: Aug-CC-pVDZ (5D, 7F)
+ There are    20 symmetry adapted cartesian basis functions of A1  symmetry.
+ There are     4 symmetry adapted cartesian basis functions of A2  symmetry.
+ There are     7 symmetry adapted cartesian basis functions of B1  symmetry.
+ There are    12 symmetry adapted cartesian basis functions of B2  symmetry.
+ There are    18 symmetry adapted basis functions of A1  symmetry.
+ There are     4 symmetry adapted basis functions of A2  symmetry.
+ There are     7 symmetry adapted basis functions of B1  symmetry.
+ There are    12 symmetry adapted basis functions of B2  symmetry.
+    41 basis functions,    65 primitive gaussians,    43 cartesian basis functions
+     5 alpha electrons        5 beta electrons
+       nuclear repulsion energy         9.1214924992 Hartrees.
+ NAtoms=    3 NActive=    3 NUniq=    2 SFac= 2.25D+00 NAtFMM=   60 NAOKFM=F Big=F
+ Integral buffers will be    131072 words long.
+ Raffenetti 2 integral format.
+ Two-electron integral symmetry is turned on.
+ Nuclei-solvent charges/DBFs interaction =         0.0162977751 a.u.
+ Nuclear repulsion after self-consistent solvent charges =        9.1377902743 Hartrees.
+ Nuclear repulsion after empirical dispersion term =        9.1377818016 Hartrees.
+ One-electron integrals computed using PRISM.
+ NBasis=    41 RedAO= T EigKep=  2.76D-03  NBF=    18     4     7    12
+ NBsUse=    41 1.00D-06 EigRej= -1.00D+00 NBFU=    18     4     7    12
+ Initial guess from the checkpoint file:  "H2O.chk"
+ SCF N**3 symmetry information disabled.
+ B after Tr=     0.000000    0.000000    0.000000
+         Rot=    1.000000    0.000000    0.000000    0.000000 Ang=   0.00 deg.
+ Initial guess orbital symmetries:
+       Occupied  (A1) (A1) (B2) (A1) (B1)
+       Virtual   (A1) (B2) (A1) (B1) (A1) (B2) (B2) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (B2) (A1) (B1) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (A2) (B1) (A1) (B2) (A1) (B2)
+                 (A1) (B1) (A1) (A2) (A1) (B2)
+ Keep R1 ints in memory in symmetry-blocked form, NReq=34953572.
+ Requested convergence on RMS density matrix=1.00D-08 within 500 cycles.
+ Requested convergence on MAX density matrix=1.00D-06.
+ Requested convergence on             energy=1.00D-06.
+ No special actions if energy rises.
+ SCF Done:  E(RB3LYP) =  -76.4510522548     A.U. after    5 cycles
+            NFock=  5  Conv=0.55D-09     -V/T= 2.0066
+
+ **********************************************************************
+
+            Population analysis using the SCF Density.
+
+ **********************************************************************
+
+ Orbital symmetries:
+       Occupied  (A1) (A1) (B2) (A1) (B1)
+       Virtual   (A1) (B2) (A1) (B1) (A1) (B2) (B2) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (B2) (A1) (B1) (A1) (A2) (A1)
+                 (B1) (B2) (A1) (B2) (A2) (B1) (A1) (B2) (A1) (B2)
+                 (A1) (B1) (A1) (A2) (A1) (B2)
+ The electronic state is 1-A1.
+ Alpha  occ. eigenvalues --  -19.16155  -1.02214  -0.53823  -0.40305  -0.32644
+ Alpha virt. eigenvalues --   -0.01718   0.03138   0.09806   0.10883   0.12746
+ Alpha virt. eigenvalues --    0.15888   0.17354   0.22346   0.28283   0.29244
+ Alpha virt. eigenvalues --    0.32312   0.44774   0.51085   0.53016   0.62543
+ Alpha virt. eigenvalues --    0.73690   0.89113   0.90710   0.94904   1.06446
+ Alpha virt. eigenvalues --    1.18843   1.21253   1.29947   1.73680   1.75085
+ Alpha virt. eigenvalues --    1.84495   2.11257   2.13536   2.27929   2.40056
+ Alpha virt. eigenvalues --    2.64270   3.28106   3.29537   3.30894   3.61331
+ Alpha virt. eigenvalues --    3.86984
+          Condensed to atoms (all electrons):
+               1          2          3
+     1  O    7.604124   0.311638   0.311638
+     2  H    0.311638   0.667236  -0.092574
+     3  H    0.311638  -0.092574   0.667236
+ Mulliken charges:
+               1
+     1  O   -0.227400
+     2  H    0.113700
+     3  H    0.113700
+ Sum of Mulliken charges =  -0.00000
+ Mulliken charges with hydrogens summed into heavy atoms:
+               1
+     1  O   -0.000000
+ Electronic spatial extent (au):  <R**2>=             20.1519
+ Charge=             -0.0000 electrons
+ Dipole moment (field-independent basis, Debye):
+    X=              0.0000    Y=             -0.0000    Z=             -2.1509  Tot=              2.1509
+ Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=             -7.8832   YY=             -4.4351   ZZ=             -6.5103
+   XY=              0.0000   XZ=              0.0000   YZ=             -0.0000
+ Traceless Quadrupole moment (field-independent basis, Debye-Ang):
+   XX=             -1.6070   YY=              1.8411   ZZ=             -0.2341
+   XY=              0.0000   XZ=              0.0000   YZ=             -0.0000
+ Octapole moment (field-independent basis, Debye-Ang**2):
+  XXX=             -0.0000  YYY=             -0.0000  ZZZ=             -1.4231  XYY=              0.0000
+  XXY=             -0.0000  XXZ=             -0.3717  XZZ=             -0.0000  YZZ=             -0.0000
+  YYZ=             -1.4627  XYZ=             -0.0000
+ Hexadecapole moment (field-independent basis, Debye-Ang**3):
+ XXXX=             -8.2680 YYYY=             -6.7177 ZZZZ=             -8.4033 XXXY=             -0.0000
+ XXXZ=             -0.0000 YYYX=              0.0000 YYYZ=              0.0000 ZZZX=             -0.0000
+ ZZZY=              0.0000 XXYY=             -2.8329 XXZZ=             -2.8308 YYZZ=             -2.2166
+ XXYZ=              0.0000 YYXZ=             -0.0000 ZZXY=              0.0000
+ N-N= 9.137781801564D+00 E-N=-1.988141244529D+02  KE= 7.595201366588D+01
+ SC-PCM: Using the SCF Density.
+ SC-PCM: The equilibrium contribution to the free energy is   -0.007179162 a.u.
+ SC-PCM: The total energy including the PCM contribution is       -76.451052458 a.u.
+ SC-PCM: Erms=  0.36170D-07 Emax=  0.77567D-07 Qconv=  0.10000D-06
+ SC-PCM: Convergence achieved in   6 iterations.
+ SC-PCM: The reaction field is now self-consistent.
+ Error on total polarization charges =  0.00810
+ --------------------------------------------------------------------
+ Self-consistent PCM results
+ ===========================
+ <psi(0)|   H    |psi(0)>                     (a.u.) =     -76.444652
+ <psi(0)|H+V(0)/2|psi(0)>                     (a.u.) =     -76.450369
+ <psi(0)|H+V(f)/2|psi(0)>                     (a.u.) =     -76.451831
+ <psi(f)|   H    |psi(f)>                     (a.u.) =     -76.443873
+ <psi(f)|H+V(f)/2|psi(f)>                     (a.u.) =     -76.451052
+ Total free energy in solution:
+ - with all non electrostatic terms           (a.u.) =     -76.446785
+ --------------------------------------------------------------------
+ (Unpolarized solute)-Solvent             (kcal/mol) =      -3.59
+ (Polarized solute)-Solvent               (kcal/mol) =      -4.50
+ Solute polarization                      (kcal/mol) =       0.49
+ Total electrostatic                      (kcal/mol) =      -4.02
+ --------------------------------------------------------------------
+ Cavitation energy                        (kcal/mol) =       6.16
+ Dispersion energy                        (kcal/mol) =      -3.85
+ Repulsion energy                         (kcal/mol) =       0.37
+ Total non electrostatic                  (kcal/mol) =       2.68
+ DeltaG (solv)                            (kcal/mol) =      -1.34
+ --------------------------------------------------------------------
+ Dipole moment (Debye):
+ in vacuo    : X=  0.0000 Y=  0.0000 Z= -1.8537 Tot=  1.8537
+ in solution : X=  0.0000 Y= -0.0000 Z= -2.1509 Tot=  2.1509
+ --------------------------------------------------------------------
+ Partition over spheres:
+ Sphere  on Atom  Surface  Charge   GEl     GCav    GDR
+    1      O1      26.79   0.196   -2.35    2.71   -1.54
+    2      H2      14.44  -0.102   -1.08    1.72   -0.97
+    3      H3      14.44  -0.102   -1.08    1.72   -0.97
+ --------------------------------------------------------------------
+ After PCM corrections, the energy is  -76.4467852097     a.u.
+ --------------------------------------------------------------------
+ 1\1\GINC-N630\SP\RB3LYP\Aug-CC-pVDZ\H2O1\HNR2\11-Jul-2022\0\\# scrf=(s
+ olvent=water,iefpcm,externaliteration,1stvac,read) rb3lyp/aug-cc-pvdz 
+ empiricaldispersion=gd3 int(grid=ultrafine) scf=(maxcycle=500)\\SP PCM
+  job for MD frame H2O\\0,1\O,0,0.,0.,0.117806\H,0,0.,-0.76419,-0.47122
+ 3\H,0,0.,0.76419,-0.471223\\Version=ES64L-G16RevB.01\State=1-A1\HF=-76
+ .4510523\RMSD=5.474e-10\Dipole=0.,0.,-0.8462255\Quadrupole=-1.1947523,
+ 1.3688054,-0.1740531,0.,0.,0.\PG=C02V [C2(O1),SGV(H2)]\\@
+
+
+ COMMON SENSE IS NOT SO COMMON.   -- VOLTAIRE
+ Job cpu time:       0 days  0 hours 10 minutes  7.4 seconds.
+ Elapsed time:       0 days  0 hours  0 minutes 17.4 seconds.
+ File lengths (MBytes):  RWF=     10 Int=      0 D2E=      0 Chk=      2 Scr=      1
+ Normal termination of Gaussian 16 at Mon Jul 11 13:45:46 2022.
