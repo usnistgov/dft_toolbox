@@ -321,7 +321,7 @@ def calc_pQCT(gas_free_energy_cluster, gas_free_energy_H2O, pcm_dG_solv, n_water
     """
     G_aq = (
         (gas_free_energy_cluster + R * temp * np.log(24.46))
-        - (gas_free_energy_H2O + n_water * R * temp * np.log(24.46))
+        - n_water * (gas_free_energy_H2O + R * temp * np.log(24.46))
         + pcm_dG_solv
         - n_water * dG_solv_H2O
         - n_water * R * temp * np.log(1000 / 18.01528)
@@ -537,7 +537,7 @@ def create_slurm_script(fname, filename_g16, nodes, partition, mem, time="168:00
     output = []
     for i,line in enumerate(template):
         if i in lines:
-            if i == 11 and log_path ==None:
+            if i == 11 and log_path == None:
                 continue
             output.append(lines[i])
         else:
@@ -606,10 +606,27 @@ def create_arkane_input(name, freq_log, pcm_log=None, linear=False, spinMultipli
                     f"frequencies = Log('{freq_log}')\n\n",
                 ]
             )
-    with open("input.py", "a") as i:
-        i.writelines(
-            ["\n\n", f"species('{name}', '{name}.py')\n", f"thermo('{name}', 'NASA')\n\n"]
-        )
+    template = io.TextIOWrapper(io.BytesIO(pkgutil.get_data(__name__, "templates/arkaneInputTemplate.py")), encoding='utf-8')
+    if os.path.exists("input.py"):    
+        topOfFile = True
+        with open("input.py", "r") as i:
+            lines = i.readlines()
+        for line in lines:
+            if "LevelOfTheory" in line or "atomEnergies" in line or "frequencyScaleFactor" in line:
+                topOfFile = False
+        if topOfFile:
+            with open("input.py", "w") as i:
+                i.writelines(template)
+        with open("input.py", "a") as i:
+            i.writelines(
+                ["\n\n", f"species('{name}', '{name}.py')\n", f"thermo('{name}', 'NASA')\n\n"]
+            )
+    else:
+        with open("input.py", "w") as i:
+            i.writelines(template)
+            i.writelines(
+                ["\n\n", f"species('{name}', '{name}.py')\n", f"thermo('{name}', 'NASA')\n\n"]
+            )
 
 
 def extract_coordinates(fname):
