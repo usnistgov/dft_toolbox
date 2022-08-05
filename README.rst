@@ -33,6 +33,11 @@ Contents and Features
 
 * *List features here*
 
+Examples
+---------
+
+We have provided a notebook of examples that calculate the free energy of solvation, in ``dft_toolbox/notebooks/DFT_Toolbox_Code_Snippets.ipynb``.
+
 Credits
 -------
 
