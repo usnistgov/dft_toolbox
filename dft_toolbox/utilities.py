@@ -368,12 +368,12 @@ def calc_thermo_NASA(coeffs, temp=298.15):
         + pow(temp, 4) * (coeffs[4] / 4)
         + coeffs[6]
     ) * R
-    G_t = H_t(temp) - temp * S_t(temp)
+    G_t = H_t - temp * S_t
     thermo = [cp_t, H_t, S_t, G_t]
     return thermo
 
 
-def calc_thermo_Arkane(fname, temp=298.15):
+def calc_thermo_Arkane(fname, temperature=298.15):
     """
     Read chemkin file "chem.inp" output from Arkane thermo() calculations. Determine high/low NASA polynomial coefficients for each "species" within the file, based on input temperature. Return calculated Cp(T), H(T), S(T), G(T) at that temperature. All values are in kcal/mol or kcal/(mol*K).
 
@@ -381,7 +381,7 @@ def calc_thermo_Arkane(fname, temp=298.15):
     ----------
     fname : str
         Specify the complete path to the chem.inp file output from Arkane.
-    temp : float
+    temperature : float, Optional, default=298.15
         Specify the absolute temperature (K) to calculate thermo at, defaulting to 298.15K.
 
     Returns
@@ -421,7 +421,7 @@ def calc_thermo_Arkane(fname, temp=298.15):
             coeffs = nasaPolyHigh
         else:
             return "Temperature out of fitted range. Please input a valid temperature."
-        output_thermo.append(calc_thermo_NASA(coeffs, temp=temp))
+        output_thermo.append(calc_thermo_NASA(coeffs, temp=temperature))
     output_thermo = np.reshape(output_thermo, (len(molecules), 4))
     return output_thermo
 

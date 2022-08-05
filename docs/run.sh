@@ -22,7 +22,20 @@ then
     fi
     if [ -f "_build/html/index.html"  ];
     then
-        start _build/html/index.html
+        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+            open _build/html/index.html
+        elif [[ "$OSTYPE" == "darwin"* ]]; then
+            open _build/html/index.html
+        elif [[ "$OSTYPE" == "cygwin" ]]; then
+            open _build/html/index.html
+        elif [[ "$OSTYPE" == "msys" ]]; then
+            start _build/html/index.html
+                # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
+        elif [[ "$OSTYPE" == "win32" ]]; then
+            start _build/html/index.html
+        else
+            echo "Unknown os type, $OSTYPE, contribute option to package docs/run.sh"
+        fi
     fi
 fi
 
