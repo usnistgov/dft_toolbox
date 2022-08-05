@@ -388,6 +388,7 @@ def calc_thermo_Arkane(fname, temp=298.15):
     ------
     output_thermo : array-like
         A 2D Numpy array containing the thermo (Cp,H,S,G at specified temperature) of each of the N molecules present in the chem.inp file, of shape (N,4). All values are in kcal/mol or kcal/(mol*K).
+
     """
     with open(rf"{fname}", "r") as o:
         lines = o.readlines()
