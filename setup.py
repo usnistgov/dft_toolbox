@@ -16,6 +16,7 @@ requirements = [
                 "sphinx_rtd_theme",
                 'sphinx-jsonschema',
                 'sphinxcontrib.blockdiag',
+                'scipy>=1.7.0'
                 ]
 
 setup_requirements = ['pytest-runner', 'wheel', ]

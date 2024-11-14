@@ -103,6 +103,7 @@ def checkOscillatingJob(runningJobIDs, outputLogs, n_points=5):
 
     Returns
     ------
+
     """
     outputLogs.sort()
     jobIDs = []
@@ -224,6 +225,7 @@ def boltzmannG(G, beta):
     ------
     averagedG : float
         The Boltzmann averaged value of the G samples provided.
+
     """
     G = np.array(G, dtype=np.float128)
     arr1 = [np.exp(-(val) * beta[i]) for i,val in enumerate(G)]
@@ -248,6 +250,7 @@ def boltzmannH(G, H, beta):
     ------
     averagedG : float
         The Boltzmann averaged value of the H samples provided.
+
     """
     G = np.array(G, dtype=np.float128)
     H = np.array(H, dtype=np.float128)
@@ -273,6 +276,7 @@ def boltzmannS(G, S, beta):
     ------
     averagedG : float
         The Boltzmann averaged value of the S samples provided.
+
     """
     G = np.array(G, dtype=np.float128)
     S = np.array(S, dtype=np.float128)
