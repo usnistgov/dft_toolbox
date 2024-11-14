@@ -49,7 +49,7 @@ setup(
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,
-    url='https://git@gitlab.nist.gov/jac16/dft-toolbox',
+    url="https://github.com/usnistgov/dft_toolbox",
     version='0.0.0',
     zip_safe=False,
 )

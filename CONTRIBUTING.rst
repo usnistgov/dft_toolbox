@@ -16,7 +16,7 @@ Reporting of Bugs and Defects
 
 A defect is any variance between actual and expected result, this can include bugs in the code or defects in the documentation or visualization.
 
-Please report defects to the `the GitLab Tracker <https://git@gitlab.nist.gov/jac16/dft-toolboxissues>`_
+Please report defects to the `the GitHub Tracker <https://github.com/usnistgov/dft_toolbox/issues>`_
 using the **Defect** description template.
 
 `Merge Request Guidelines`_ for details on best developmental practices.
@@ -24,7 +24,7 @@ using the **Defect** description template.
 Features
 ~~~~~~~~
 
-If you wish to propose a feature, please file an issue on `the GitLab Tracker <https://git@gitlab.nist.gov/jac16/dft-toolboxissues>`_ using the **Feature** description template. Community members will help refine and design your idea until it is ready for implementation.
+If you wish to propose a feature, please file an issue on `the GitHub Tracker <https://github.com/usnistgov/dft_toolbox/issues>`_ using the **Feature** description template. Community members will help refine and design your idea until it is ready for implementation.
 Via these early reviews, we hope to steer contributors away from producing work outside of the project boundaries.
 
 Please see the `Merge Request Guidelines`_ for details on best developmental practices.
@@ -41,8 +41,7 @@ If a new module is added, be sure to add it to the appropriate .rst file in the 
 Working on issues
 ------------------
 
-After an issue is created, the progress of the issues is tracked on the `GitLab issue board <https://git@gitlab.nist.gov/jac16/dft-toolboxboards>`_.
-The maintainers will update the state using `labels <https://git@gitlab.nist.gov/jac16/dft-toolboxlabels>`_ .
+After an issue is created, the progress of the issues is tracked on the `GitHub issue board <https://github.com/usnistgov/dft_toolbox/issues>`_.
 Once an issue is ready for review a Merge Request can be opened.
 
 Merge Request Guidelines
@@ -72,10 +71,10 @@ Setting up DFT Toolbox for local development
 
 Ready to contribute? Here's how to set up `DFT Toolbox` for local development.
 
-1. Fork the `dft_toolbox` repo on GitLab.
+1. Fork the `dft_toolbox` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@gitlab.nist.gov:your_username_here/dft_toolbox.git
+    $ git clone git@github.com:usnistgov/dft_toolbox.git
 
 3. Install your local copy into a virtualenv. Assuming you have conda installed, this is how you set up your fork for local development::
 
@@ -102,13 +101,13 @@ Ready to contribute? Here's how to set up `DFT Toolbox` for local development.
 
       $ python -m md_spa -d --compile-docs
 
-6. Commit your changes and push your branch to GitLab::
+6. Commit your changes and push your branch to GitHub::
 
     $ git add .
     $ git commit -m "Your detailed description of your changes."
     $ git push origin name-of-your-bugfix-or-feature
 
-7. Submit a merge request through the GitLab website.
+7. Submit a merge request through the GitHub website.
 
 
 .. tip:: Autobuild documentation
